@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/curl --silent --show-error --fail --max-time 1 --request POST --header 'Content-Type: application/json' --header 'X-Xbox-Codex-Hook: 1' --data '{}' http://127.0.0.1:8765/api/hooks/permission-request >/dev/null 2>&1 || true",
+            "timeout": 2
+          }
+        ]
+      }
+    ]
+  }
+}

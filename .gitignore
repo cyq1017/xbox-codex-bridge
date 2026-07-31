@@ -1,0 +1,23 @@
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Generated app bundles and probe binaries
+*.app/
+Tools/XboxLightProbe/build/
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# macOS and editors
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Local runtime output
+*.log

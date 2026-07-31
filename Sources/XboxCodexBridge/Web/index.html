@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Xbox Codex Bridge</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">LOCAL CONTROL SURFACE</p>
+        <h1>Xbox <span>×</span> Codex Bridge</h1>
+      </div>
+      <div class="status-cluster" aria-label="设备状态">
+        <span class="status-pill" id="controller-status"><i></i>等待手柄</span>
+        <span class="status-pill" id="accessibility-status"><i></i>辅助功能</span>
+        <span class="status-pill" id="haptic-status"><i></i>震动</span>
+        <span class="status-pill" id="light-status"><i></i>灯光</span>
+      </div>
+    </header>
+
+    <main>
+      <nav class="layer-tabs" aria-label="映射层">
+        <button data-layer="base" class="active">默认 <small>BASE</small></button>
+        <button data-layer="task">任务 <small>LB</small></button>
+        <button data-layer="developer">开发 <small>RB</small></button>
+        <button data-layer="safety">安全 <small>LB + RB</small></button>
+        <button data-layer="system">系统 <small>VIEW</small></button>
+      </nav>
+
+      <section class="workspace">
+        <article class="controller-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">LIVE CONTROLLER</p>
+              <h2 id="controller-name">Xbox Wireless Controller</h2>
+            </div>
+            <span class="live-layer" id="live-layer">LIVE · BASE</span>
+          </div>
+
+          <div class="controller-stage" aria-label="Xbox 手柄映射图">
+            <div class="gamepad-shell">
+              <div class="grip grip-left"></div>
+              <div class="grip grip-right"></div>
+              <button class="control shoulder lb" data-control="lb"><b>LB</b></button>
+              <button class="control shoulder rb" data-control="rb"><b>RB</b></button>
+              <button class="control trigger lt" data-control="lt"><b>LT</b><small>PTT</small></button>
+              <button class="control trigger rt" data-control="rt"><b>RT</b><small>SEND</small></button>
+
+              <div class="stick-cluster left-stick">
+                <button class="stick-direction up" data-control="leftStickUp" aria-label="左摇杆上">▲</button>
+                <button class="stick-direction right" data-control="leftStickRight" aria-label="左摇杆右">▶</button>
+                <button class="stick-direction down" data-control="leftStickDown" aria-label="左摇杆下">▼</button>
+                <button class="stick-direction left" data-control="leftStickLeft" aria-label="左摇杆左">◀</button>
+                <button class="control stick-button" data-control="l3"><span></span><b>L3</b></button>
+              </div>
+
+              <div class="dpad-cluster">
+                <button class="control dpad up" data-control="dpadUp" aria-label="十字键上">▲</button>
+                <button class="control dpad right" data-control="dpadRight" aria-label="十字键右">▶</button>
+                <button class="control dpad down" data-control="dpadDown" aria-label="十字键下">▼</button>
+                <button class="control dpad left" data-control="dpadLeft" aria-label="十字键左">◀</button>
+              </div>
+
+              <div class="face-cluster">
+                <button class="control face y" data-control="y">Y</button>
+                <button class="control face b" data-control="b">B</button>
+                <button class="control face a" data-control="a">A</button>
+                <button class="control face x" data-control="x">X</button>
+              </div>
+
+              <div class="stick-cluster right-stick">
+                <button class="stick-direction up" data-control="rightStickUp" aria-label="右摇杆上">▲</button>
+                <button class="stick-direction right" data-control="rightStickRight" aria-label="右摇杆右">▶</button>
+                <button class="stick-direction down" data-control="rightStickDown" aria-label="右摇杆下">▼</button>
+                <button class="stick-direction left" data-control="rightStickLeft" aria-label="右摇杆左">◀</button>
+                <button class="control stick-button" data-control="r3"><span></span><b>R3</b></button>
+              </div>
+
+              <button class="control utility view" data-control="view"><b>VIEW</b></button>
+              <button class="control utility menu" data-control="menu"><b>MENU</b></button>
+              <button class="control utility share" data-control="share"><b>SHARE</b></button>
+              <button class="control xbox-light" id="xbox-light" data-control="home" aria-label="Xbox Logo"><b>X</b></button>
+            </div>
+          </div>
+
+          <div class="activity-strip">
+            <div>
+              <span>最近状态</span>
+              <strong id="last-message">正在等待 Xbox 手柄连接</strong>
+            </div>
+            <div>
+              <span>语音</span>
+              <strong id="ptt-state">IDLE</strong>
+            </div>
+          </div>
+        </article>
+
+        <aside class="mapping-panel panel">
+          <p class="section-label">MAPPING INSPECTOR</p>
+          <div class="selected-control">
+            <span id="selected-control-badge">A</span>
+            <div>
+              <small>当前控件</small>
+              <h2 id="selected-control-name">A Button</h2>
+            </div>
+          </div>
+
+          <label for="action-select">Codex 动作</label>
+          <select id="action-select"></select>
+          <p class="shortcut-note" id="shortcut-note"></p>
+
+          <div class="button-row">
+            <button class="primary" id="save-mapping">保存映射</button>
+            <button class="secondary" id="test-action">测试动作</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>设备输出测试</h3>
+          <div class="test-grid">
+            <button id="test-haptic">震动一下</button>
+            <button class="light-test white" data-light="1,1,1">白</button>
+            <button class="light-test blue" data-light="0.1,0.42,1">蓝</button>
+            <button class="light-test green" data-light="0.1,0.85,0.38">绿</button>
+            <button class="light-test amber" data-light="1,0.55,0.08">黄</button>
+            <button class="light-test red" data-light="1,0.12,0.15">红</button>
+          </div>
+          <p class="muted">Xbox Logo 灯是否可控由型号、固件和连接方式决定；不可用时使用 HUD。震动只用于手动测试和真实人工批准提醒。</p>
+
+          <div class="divider"></div>
+
+          <div class="window-heading">
+            <h3>Codex 窗口</h3>
+            <span id="window-count">0</span>
+          </div>
+          <div class="window-list" id="window-list">
+            <span class="muted">正在读取窗口…</span>
+          </div>
+          <p class="muted">轻按 VIEW 显示跨 Space 全局窗口选择器；VIEW + X 新建无项目任务；VIEW + Y 从文件夹新建项目任务。</p>
+
+          <div class="divider"></div>
+
+          <div class="button-row compact">
+            <button class="secondary" id="export-config">导出 JSON</button>
+            <label class="file-button" for="import-config">导入 JSON</label>
+            <input type="file" id="import-config" accept="application/json,.json">
+          </div>
+        </aside>
+      </section>
+
+      <section class="lower-grid">
+        <article class="panel comparison-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-label">RELIABLE DAILY PROFILE</p>
+              <h2>可靠日用布局</h2>
+            </div>
+            <span class="coverage">默认动作 · 全部使用验证路径</span>
+          </div>
+          <div class="comparison-table">
+            <div class="table-head"><span>用途</span><span>Xbox</span><span>Codex 动作</span></div>
+            <div><span>语音 / 发送 / 取消</span><strong>LT / RT / B</strong><span>直接听写 / Return / 双 ESC</span></div>
+            <div><span>常用工具</span><strong>X / Y</strong><span>底部面板 / 新建任务</span></div>
+            <div><span>输入框</span><strong>R3 快按 / 长按</strong><span>聚焦 / 安全清空</span></div>
+            <div><span>光标定位</span><strong>左摇杆 ← → / ↑ ↓</strong><span>逐字移动 / 当前行首尾</span></div>
+            <div><span>局部选择</span><strong>右摇杆 ← → / ↑ ↓</strong><span>逐字选择 / 选到当前行首尾</span></div>
+            <div><span>局部删除</span><strong>L3</strong><span>删除选区 / 向前删除一字</span></div>
+            <div><span>任务切换</span><strong>D-pad ← →</strong><span>Previous / Next Task</span></div>
+            <div><span>面板控制</span><strong>MENU / A / D-pad ↑ ↓</strong><span>Sidebar / Side Panel / Bottom Panel</span></div>
+            <div><span>任务层</span><strong>LB + D-pad / RT</strong><span>切换、置顶、新任务</span></div>
+            <div><span>输出选区</span><strong>LB + A / X / Y</strong><span>添加到任务 / 侧边提问 / 更多详情</span></div>
+            <div><span>开发层</span><strong>RB + A/B/X/Y</strong><span>面板、Terminal、Browser</span></div>
+            <div><span>安全层</span><strong>LB + RB + Y</strong><span>选择权限模式</span></div>
+            <div><span>审批卡</span><strong>LB + RB + A/B</strong><span>长按批准 / 拒绝</span></div>
+            <div><span>创建</span><strong>VIEW + X / Y</strong><span>无项目新任务 / 文件夹新项目</span></div>
+            <div><span>窗口选择</span><strong>轻按 VIEW</strong><span>十字键选择、A 进入、B 取消</span></div>
+            <div><span>多窗口</span><strong>VIEW + D-pad ← →</strong><span>跨显示器 Space 循环切换</span></div>
+            <div><span>系统层</span><strong>VIEW + A/B/MENU</strong><span>设置、快捷键、反馈</span></div>
+          </div>
+        </article>
+
+        <article class="panel setup-panel">
+          <p class="section-label">VOICE SETUP</p>
+          <h2>LT 直接控制听写</h2>
+          <div class="ptt-setup">
+            <strong>系统设置 → 隐私与安全性 → 辅助功能</strong>
+            <span>允许桥接器或启动它的终端。等 Codex 回复结束后，按住 LT 开始听写，松开停止；无需绑定 F13 快捷键。</span>
+          </div>
+          <p>推理循环、Fast、Review、任务槽位和环境动作仍保留在动作目录，但没有稳定适配器时不会进入默认布局，也不会假报执行成功。</p>
+          <div class="shortcut-list" id="shortcut-list"></div>
+        </article>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
