@@ -18,14 +18,24 @@ function assertExists(relativePath) {
 for (const relativePath of [
   ".gitignore",
   "LICENSE",
+  "VERSION",
   "CONTRIBUTING.md",
   "SECURITY.md",
   ".github/workflows/ci.yml",
+  ".github/release.yml",
   "Scripts/uninstall-background-service.sh",
+  "Scripts/release-check.sh",
   "LaunchAgent/io.github.cyq1017.xbox-codex-bridge.plist",
+  "docs/CONTROLS.md",
+  "docs/TROUBLESHOOTING.md",
+  "docs/releases/v0.1.0.md",
+  "docs/releases/v0.1.0-smoke-test.md",
+  "assets/xbox-codex-bridge-hero.png",
 ]) {
   assertExists(relativePath);
 }
+
+assert.equal(read("VERSION").trim(), "0.1.0");
 
 const gitignore = read(".gitignore");
 for (const ignored of [".build/", ".DS_Store", "Tools/XboxLightProbe/build/"]) {
@@ -70,9 +80,34 @@ const workflow = read(".github/workflows/ci.yml");
 assert.match(workflow, /swift test/);
 assert.match(workflow, /Tests\/\*\.js/);
 
+const releaseCheck = read("Scripts/release-check.sh");
+assert.match(releaseCheck, /swift test/);
+assert.match(releaseCheck, /Tests\/\*\.js/);
+assert.match(releaseCheck, /swift build -c release/);
+assert.match(releaseCheck, /XboxLightProbe/);
+assert.match(releaseCheck, /git diff --check/);
+assert.match(
+  releaseCheck,
+  /exclude\)Scripts\/release-check\.sh/,
+  "the private-data scan should exclude its own detection patterns",
+);
+
+assert.doesNotMatch(
+  read("docs/releases/v0.1.0-smoke-test.md"),
+  /\/Users\//,
+  "public validation docs should not include a maintainer-specific path",
+);
+
 const readme = read("README.md");
 assert.match(readme, /RB \+ RT/);
 assert.match(readme, /发送并在任务完成后震动提醒/);
 assert.match(readme, /MIT License/);
+assert.match(readme, /assets\/xbox-codex-bridge-hero\.png/);
+assert.match(readme, /docs\/CONTROLS\.md/);
+assert.match(readme, /docs\/TROUBLESHOOTING\.md/);
+assert.ok(
+  readme.split("\n").length <= 190,
+  "README should stay concise; detailed guidance belongs in docs",
+);
 
 console.log("Open-source release contract passed");

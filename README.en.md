@@ -2,6 +2,10 @@
 
 [中文说明](README.md) · [MIT License](LICENSE)
 
+<p align="center">
+  <img src="assets/xbox-codex-bridge-hero.png" alt="Xbox Codex Bridge" width="100%">
+</p>
+
 Xbox Codex Bridge is a local macOS helper and browser-based console that maps an Xbox controller to a Codex control surface inspired by the core interaction ideas of Codex Micro.
 
 It supports push-to-talk dictation, send/cancel, model and permission menus, task and window navigation, composer editing, optional approval alerts, and opt-in task-completion haptics. It is a community experiment, not an OpenAI product or a one-to-one Codex Micro clone.
@@ -46,7 +50,7 @@ XBOX_CODE_SIGN_IDENTITY="Apple Development: Your Name (TEAMID)" ./run.command
 | View + X | Create a standalone task |
 | View + Y | Start a project task through Open Folder |
 
-The Chinese README contains the complete mapping table, haptic behavior, troubleshooting guide, security boundaries, and known limitations.
+The Chinese README contains the quick start and project overview. See [Controls](docs/CONTROLS.md), [Troubleshooting](docs/TROUBLESHOOTING.md), and the [v0.1.0 Preview release notes](docs/releases/v0.1.0.md) for details.
 
 ## Uninstall
 
