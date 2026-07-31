@@ -3,7 +3,7 @@
 [中文说明](README.md) · [MIT License](LICENSE)
 
 <p align="center">
-  <img src="assets/xbox-codex-bridge-hero.png" alt="Xbox Codex Bridge" width="100%">
+  <img src="assets/xbox-codex-bridge-hero-v2.png" alt="Xbox Codex Bridge controlling Codex voice, tasks, models, permissions, and windows" width="100%">
 </p>
 
 Xbox Codex Bridge is a local macOS helper and browser-based console that maps an Xbox controller to a Codex control surface inspired by the core interaction ideas of Codex Micro.
@@ -18,6 +18,21 @@ It supports push-to-talk dictation, send/cancel, model and permission menus, tas
 - Xbox Wireless Controller or a compatible extended gamepad
 
 ## Quick start
+
+### Install with Codex (recommended)
+
+Create a task in Codex and paste the prompt below. Codex can inspect the project, explain every local change, run the checks, and guide you through the macOS steps that require your confirmation.
+
+```text
+Help me install Xbox Codex Bridge from:
+https://github.com/cyq1017/xbox-codex-bridge
+
+Read README.md, run.command, and the Scripts directory before installing. First tell me which commands you plan to run and what they will create or modify, then wait for my confirmation. Do not use sudo, modify the Codex app, bypass macOS permission prompts, or expose port 8765 beyond loopback. After installation, run the project's own checks, guide me through enabling Accessibility for Xbox Codex Bridge, and verify the dashboard, controller, dictation, and haptics status.
+```
+
+Codex can perform the build and diagnostics, but you must approve Accessibility access yourself in System Settings.
+
+### Manual install
 
 ```bash
 git clone https://github.com/cyq1017/xbox-codex-bridge.git

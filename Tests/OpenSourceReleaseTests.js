@@ -30,7 +30,7 @@ for (const relativePath of [
   "docs/TROUBLESHOOTING.md",
   "docs/releases/v0.1.0.md",
   "docs/releases/v0.1.0-smoke-test.md",
-  "assets/xbox-codex-bridge-hero.png",
+  "assets/xbox-codex-bridge-hero-v2.png",
 ]) {
   assertExists(relativePath);
 }
@@ -102,12 +102,18 @@ const readme = read("README.md");
 assert.match(readme, /RB \+ RT/);
 assert.match(readme, /发送并在任务完成后震动提醒/);
 assert.match(readme, /MIT License/);
-assert.match(readme, /assets\/xbox-codex-bridge-hero\.png/);
+assert.match(readme, /assets\/xbox-codex-bridge-hero-v2\.png/);
+assert.match(readme, /交给 Codex 安装/);
+assert.match(readme, /不要绕过 macOS 的权限确认/);
 assert.match(readme, /docs\/CONTROLS\.md/);
 assert.match(readme, /docs\/TROUBLESHOOTING\.md/);
 assert.ok(
   readme.split("\n").length <= 190,
   "README should stay concise; detailed guidance belongs in docs",
 );
+
+const troubleshooting = read("docs/TROUBLESHOOTING.md");
+assert.match(troubleshooting, /交给 Codex 诊断/);
+assert.match(troubleshooting, /不要修改 Codex App/);
 
 console.log("Open-source release contract passed");

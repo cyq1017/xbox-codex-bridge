@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/xbox-codex-bridge-hero.png" alt="Xbox Codex Bridge：用手柄控制 Codex" width="100%">
+  <img src="assets/xbox-codex-bridge-hero-v2.png" alt="Xbox Codex Bridge：用手柄控制 Codex 的语音、任务、模型、权限与窗口" width="100%">
 </p>
 
 # Xbox Codex Bridge
@@ -38,6 +38,21 @@
 ## 快速开始
 
 要求：macOS 13+、Xcode Command Line Tools、Codex 桌面 App，以及 Xbox Wireless Controller 或兼容手柄。
+
+### 交给 Codex 安装（推荐）
+
+在 Codex 中新建一个任务，把下面这段话完整粘贴进去。Codex 会检查环境、解释将要执行的操作，并带你完成需要手动确认的 macOS 权限：
+
+```text
+请帮我安装 Xbox Codex Bridge：
+https://github.com/cyq1017/xbox-codex-bridge
+
+先阅读 README.md、run.command 和 Scripts 目录，再执行安装。请先告诉我将运行哪些命令、会在本机创建或修改什么，等我确认后再继续。不要使用 sudo，不要修改 Codex App，不要绕过 macOS 的权限确认，也不要把 8765 端口暴露到局域网或公网。安装后运行项目自带的检查，引导我手动开启 Xbox Codex Bridge 的辅助功能权限，并确认控制台、手柄、语音和震动状态。
+```
+
+Codex 可以执行构建和诊断，但辅助功能授权必须由你在系统设置中亲自确认。
+
+### 手动安装
 
 ```bash
 git clone https://github.com/cyq1017/xbox-codex-bridge.git
@@ -126,7 +141,7 @@ for test_file in Tests/*.js; do node "$test_file" || exit 1; done
 swift build -c release
 ```
 
-欢迎提交兼容性报告和小而明确的改进。请在反馈中注明 macOS、Codex App、手柄型号和连接方式。
+遇到问题时，可以直接使用 [交给 Codex 的诊断提示词](docs/TROUBLESHOOTING.md#交给-codex-诊断推荐)。欢迎提交兼容性报告和小而明确的改进；请注明 macOS、Codex App、手柄型号和连接方式。
 
 ## License
 
