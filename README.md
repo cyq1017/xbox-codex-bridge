@@ -116,7 +116,7 @@ flowchart LR
 ./Scripts/release-check.sh
 ```
 
-然后按 [v0.1.0 实体手柄清单](docs/releases/v0.1.0-smoke-test.md) 验证语音、发送、中止、模型、权限、窗口与完成震动。
+本版本已经在发布演示录制中完成过核心流程验证。面向其他手柄型号、macOS 或连接方式时，可以使用 [v0.1.0 手柄清单](docs/releases/v0.1.0-smoke-test.md) 做可选的硬件兼容性复验，不再作为本次发布的阻塞条件。
 
 ## 文档
 

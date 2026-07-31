@@ -86,6 +86,8 @@ assert.match(releaseCheck, /Tests\/\*\.js/);
 assert.match(releaseCheck, /swift build -c release/);
 assert.match(releaseCheck, /XboxLightProbe/);
 assert.match(releaseCheck, /git diff --check/);
+assert.match(releaseCheck, /Optional compatibility check/);
+assert.doesNotMatch(releaseCheck, /Next: complete/);
 assert.match(
   releaseCheck,
   /exclude\)Scripts\/release-check\.sh/,
@@ -105,6 +107,8 @@ assert.match(readme, /MIT License/);
 assert.match(readme, /assets\/xbox-codex-bridge-hero-v2\.png/);
 assert.match(readme, /交给 Codex 安装/);
 assert.match(readme, /不要绕过 macOS 的权限确认/);
+assert.match(readme, /发布演示录制中完成过核心流程验证/);
+assert.match(readme, /可选的硬件兼容性复验/);
 assert.match(readme, /docs\/CONTROLS\.md/);
 assert.match(readme, /docs\/TROUBLESHOOTING\.md/);
 assert.ok(

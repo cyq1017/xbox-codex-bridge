@@ -50,4 +50,4 @@ plist_version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' 
 rg -q "## ${version} - Unreleased" CHANGELOG.md
 
 print "AUTOMATED RELEASE CHECK PASSED (v$version)"
-print "Next: complete docs/releases/v${version}-smoke-test.md with a physical controller."
+print "Optional compatibility check: docs/releases/v${version}-smoke-test.md"
