@@ -2,7 +2,7 @@
 
 All notable user-visible changes will be documented in this file.
 
-## 0.1.0 - Unreleased
+## 0.1.0 - 2026-08-01
 
 - Added Xbox controller layers for input, task, developer, safety, and window actions.
 - Added LT push-to-talk dictation through macOS Accessibility.

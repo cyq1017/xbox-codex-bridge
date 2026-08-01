@@ -37,6 +37,10 @@ for (const relativePath of [
 
 assert.equal(read("VERSION").trim(), "0.1.0");
 
+const changelog = read("CHANGELOG.md");
+assert.match(changelog, /## 0\.1\.0 - 2026-08-01/);
+assert.doesNotMatch(changelog, /## 0\.1\.0 - Unreleased/);
+
 const gitignore = read(".gitignore");
 for (const ignored of [".build/", ".DS_Store", "Tools/XboxLightProbe/build/"]) {
   assert.ok(gitignore.includes(ignored), `.gitignore should exclude ${ignored}`);

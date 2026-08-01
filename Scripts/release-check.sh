@@ -47,7 +47,7 @@ print "[7/7] Version consistency"
 version="$(<VERSION)"
 plist_version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' App/Info.plist)"
 [[ "$version" == "$plist_version" ]]
-rg -q "## ${version} - Unreleased" CHANGELOG.md
+rg -q "## ${version} - [0-9]{4}-[0-9]{2}-[0-9]{2}" CHANGELOG.md
 
 print "AUTOMATED RELEASE CHECK PASSED (v$version)"
 print "Optional compatibility check: docs/releases/v${version}-smoke-test.md"
