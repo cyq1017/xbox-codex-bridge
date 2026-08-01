@@ -81,6 +81,10 @@ assert.match(uninstallScript, /Library\/LaunchAgents/);
 assert.match(uninstallScript, /Applications\/XboxCodexBridge\.app/);
 
 const workflow = read(".github/workflows/ci.yml");
+assert.match(
+  workflow,
+  /actions\/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7\.0\.1/,
+);
 assert.match(workflow, /swift test/);
 assert.match(workflow, /Tests\/\*\.js/);
 
